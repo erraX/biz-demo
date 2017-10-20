@@ -3,7 +3,7 @@ require('./check-versions')()
 
 const config = require('../config')
 if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
+    process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
 
 const opn = require('opn')
@@ -12,8 +12,8 @@ const express = require('express')
 const webpack = require('webpack')
 const proxyMiddleware = require('http-proxy-middleware')
 const webpackConfig = (process.env.NODE_ENV === 'testing' || process.env.NODE_ENV === 'production')
-  ? require('./webpack.prod.conf')
-  : require('./webpack.dev.conf')
+    ? require('./webpack.prod.conf')
+    : require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
 const port = process.env.PORT || config.dev.port
@@ -27,13 +27,13 @@ const app = express()
 const compiler = webpack(webpackConfig)
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-  quiet: true
+    publicPath: webpackConfig.output.publicPath,
+    quiet: true
 })
 
 const hotMiddleware = require('webpack-hot-middleware')(compiler, {
-  log: false,
-  heartbeat: 2000
+    log: false,
+    heartbeat: 2000
 })
 // force page reload when html-webpack-plugin template changes
 // currently disabled until this is resolved:
@@ -49,13 +49,44 @@ const hotMiddleware = require('webpack-hot-middleware')(compiler, {
 // compilation error display
 app.use(hotMiddleware)
 
+
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
-  let options = proxyTable[context]
-  if (typeof options === 'string') {
-    options = { target: options }
-  }
-  app.use(proxyMiddleware(options.filter || context, options))
+    const filter = (pathname, req) => {
+        const referer = req.headers.referer;
+        console.log('path', req.path);
+        console.log('header', req.headers);
+        return !/[?&](?:ed|enable_debug)\b/i.test(referer);
+    };
+    let options = proxyTable[context]
+    if (typeof options === 'string') {
+        options = { target: options }
+    }
+    app.use(context, proxyMiddleware(filter, options))
+    app.use(context, function (req, res, next) {
+        var baseUrl = req.baseUrl;
+        var reqPath = req.path;
+        var mockFilePath = path.join(__dirname, '../mockup', baseUrl, reqPath);
+
+        // 删除缓存，每次编辑完文件之后不用重新启动服务
+        delete require.cache[require.resolve(mockFilePath)];
+
+        var resHandler = require(mockFilePath);
+
+        // 请求接口的延迟
+        var timeout = resHandler.timeout || 0;
+
+        // 请求数据
+        var data = resHandler.response(req);
+
+        console.log('Find mock file:', mockFilePath);
+        console.log('Mock file timeout:', timeout);
+        console.log('Mock file data:', data);
+
+        setTimeout(function () {
+            res.send(data);
+        }, timeout);
+    });
 })
 
 // handle fallback for HTML5 history API
@@ -73,8 +104,8 @@ const uri = 'http://localhost:' + port
 var _resolve
 var _reject
 var readyPromise = new Promise((resolve, reject) => {
-  _resolve = resolve
-  _reject = reject
+    _resolve = resolve
+    _reject = reject
 })
 
 var server
@@ -83,25 +114,25 @@ portfinder.basePort = port
 
 console.log('> Starting dev server...')
 devMiddleware.waitUntilValid(() => {
-  portfinder.getPort((err, port) => {
-    if (err) {
-      _reject(err)
-    }
-    process.env.PORT = port
-    var uri = 'http://localhost:' + port
-    console.log('> Listening at ' + uri + '\n')
-    // when env is testing, don't need open it
-    if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
-      opn(uri)
-    }
-    server = app.listen(port)
-    _resolve()
-  })
+    portfinder.getPort((err, port) => {
+        if (err) {
+            _reject(err)
+        }
+        process.env.PORT = port
+        var uri = 'http://localhost:' + port
+        console.log('> Listening at ' + uri + '\n')
+        // when env is testing, don't need open it
+        if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
+            opn(uri)
+        }
+        server = app.listen(port)
+        _resolve()
+    })
 })
 
 module.exports = {
-  ready: readyPromise,
-  close: () => {
-    server.close()
-  }
+    ready: readyPromise,
+    close: () => {
+        server.close()
+    }
 }

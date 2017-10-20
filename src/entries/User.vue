@@ -1,22 +1,37 @@
 <template>
     <div id="app">
-        <img src="../assets/logo.png">
-        <biz-header />
-        <router-view/>
+        <biz-header 
+            :userInfo="userInfo"
+            :naviItems="naviItems" 
+        />
+        <router-view />
         <biz-footer />
     </div>
 </template>
 
 <script>
+    import Navigations from '@/configs/Navigations';
     import BizHeader from '@/components/BizHeader';
     import BizFooter from "@/components/BizFooter";
+
+    import {getUserInfo} from '@/api';
 
     export default {
         name: 'app',
 
         components: {
-            BizFooter,
             BizHeader,
+            BizFooter,
+        },
+
+        data() {
+            return {
+                naviItems: Navigations,
+
+                userInfo: {
+                    username: 'niminjie',
+                },
+            };
         },
 
         /**
@@ -25,7 +40,10 @@
          * 比如请求用户的权限
          */
         created() {
-
+            this.$http.post('/user/get')
+                .then(data => {
+                    console.log(data);
+                });
         },
     };
 </script>
