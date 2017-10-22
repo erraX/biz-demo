@@ -7,26 +7,28 @@
                 :default-active="defaultActiveIdx"
                 @select="onSelectMenu"
             >
-                <el-submenu 
+                <router-link 
                     v-for="(item, idx) in naviItems"
-                    v-if="item.childLinks && item.childLinks.length" 
                     :key="idx"
-                    :index="String(idx)"
+                    :to="item.link"
                 >
-                    <template slot="title">
-                        <router-link :to="item.link">{{ item.label }}</router-link>
-                    </template>
-                    <el-menu-item 
-                        v-for="(subItem, idx2) in item.childLinks"
-                        :index="idx + '-' + idx2"
-                        :key="idx + '-' + idx2"
+                    <el-submenu 
+                        v-if="item.childLinks && item.childLinks.length" 
+                        :index="String(idx)"
                     >
-                        <router-link :to="subItem.link">{{ subItem.label }}</router-link>
-                    </el-menu-item>
-                </el-submenu>
-                <el-menu-item v-else :index="String(idx)">
-                    <router-link :to="item.link">{{ item.label }}</router-link>
-                </el-menu-item>
+                        <template slot="title">{{ item.label }}</template>
+                        <router-link 
+                            v-for="(subItem, idx2) in item.childLinks"
+                            :key="idx + '-' + idx2"
+                            :to="subItem.link"
+                        >
+                            <el-menu-item :index="idx + '-' + idx2">
+                                {{ subItem.label }}
+                            </el-menu-item>
+                        </router-link>
+                    </el-submenu>
+                    <el-menu-item v-else :index="String(idx)">{{ item.label }}</el-menu-item>
+                    </router-link>
             </el-menu>
         </div>
         <div class="user-info">
@@ -55,6 +57,7 @@
 
         methods: {
             onSelectMenu(index) {
+                debugger
                 this.activeIdx = index;
             },
         },
@@ -62,15 +65,11 @@
 </script>
 
 <style lang="less" scoped>
-    .header {
-
-    }
-
-    .navi-container {
-
-    }
-
     .user-info {
-
+        position: absolute;
+        right: 13px;
+        text-align: right;
+        top: 78px;
+        color: #fff;
     }
 </style>

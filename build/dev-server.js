@@ -54,8 +54,6 @@ app.use(hotMiddleware)
 Object.keys(proxyTable).forEach(function (context) {
     const filter = (pathname, req) => {
         const referer = req.headers.referer;
-        console.log('path', req.path);
-        console.log('header', req.headers);
         return !/[?&](?:ed|enable_debug)\b/i.test(referer);
     };
     let options = proxyTable[context]
@@ -81,7 +79,7 @@ Object.keys(proxyTable).forEach(function (context) {
 
         console.log('Find mock file:', mockFilePath);
         console.log('Mock file timeout:', timeout);
-        console.log('Mock file data:', data);
+        // console.log('Mock file data:', data);
 
         setTimeout(function () {
             res.send(data);
