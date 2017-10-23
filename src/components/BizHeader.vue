@@ -4,20 +4,18 @@
             <el-menu
                 theme="dark"
                 mode="horizontal"
-                :default-active="defaultActiveIdx"
-                @select="onSelectMenu"
             >
-                <router-link 
+                <router-link
                     v-for="(item, idx) in naviItems"
                     :key="idx"
                     :to="item.link"
                 >
-                    <el-submenu 
-                        v-if="item.childLinks && item.childLinks.length" 
+                    <el-submenu
+                        v-if="item.childLinks && item.childLinks.length"
                         :index="String(idx)"
                     >
                         <template slot="title">{{ item.label }}</template>
-                        <router-link 
+                        <router-link
                             v-for="(subItem, idx2) in item.childLinks"
                             :key="idx + '-' + idx2"
                             :to="subItem.link"
@@ -28,7 +26,7 @@
                         </router-link>
                     </el-submenu>
                     <el-menu-item v-else :index="String(idx)">{{ item.label }}</el-menu-item>
-                    </router-link>
+                </router-link>
             </el-menu>
         </div>
         <div class="user-info">
@@ -40,27 +38,7 @@
 <script>
     export default {
         name: 'BizHeader',
-
         props: ['userInfo', 'naviItems'],
-
-        data() {
-            return {
-                activeIdx: null,
-            };
-        },
-
-        computed: {
-            defaultActiveIdx() {
-                return '0';
-            },
-        },
-
-        methods: {
-            onSelectMenu(index) {
-                debugger
-                this.activeIdx = index;
-            },
-        },
     };
 </script>
 
@@ -71,5 +49,11 @@
         text-align: right;
         top: 78px;
         color: #fff;
+    }
+
+    .router-link-exact-active {
+        .el-menu-item {
+            color: #20a0ff;
+        }
     }
 </style>
