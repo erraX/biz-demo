@@ -8,23 +8,23 @@ export default [
     {
         key: 'promotion',
         label: '推广管理',
-        link: '/user/listPlan',
+        link: '/plan',
         childLinks: [],
     },
     {
         key: 'report',
         label: '统计报告',
-        link: '/user/getReportList',
+        link: '/report/basic',
         childLinks: [
             {
                 key: 'base-report',
                 label: '基础报告',
-                link: '/user/getReportList',
+                link: '/report/basic',
             },
             {
                 key: 'audiences-report',
                 label: '受众报告',
-                link: '/user/audiencesReport',
+                link: '/report/audiences',
             },
         ],
     },

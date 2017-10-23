@@ -4,6 +4,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 import ElementUI from 'element-ui';
 import User from './entries/User';
+import store from './store';
 import router from './router';
 
 import 'element-ui/lib/theme-default/index.css'
@@ -17,6 +18,7 @@ Vue.use(ElementUI);
 new Vue({
     el: '#app',
     router,
+    store,
     template: '<User />',
     components: { User },
 });

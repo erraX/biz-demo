@@ -1,34 +1,10 @@
 <template>
     <div class="header">
-        <div class="navi-container">
-            <el-menu
-                theme="dark"
-                mode="horizontal"
-            >
-                <router-link
-                    v-for="(item, idx) in naviItems"
-                    :key="idx"
-                    :to="item.link"
-                >
-                    <el-submenu
-                        v-if="item.childLinks && item.childLinks.length"
-                        :index="String(idx)"
-                    >
-                        <template slot="title">{{ item.label }}</template>
-                        <router-link
-                            v-for="(subItem, idx2) in item.childLinks"
-                            :key="idx + '-' + idx2"
-                            :to="subItem.link"
-                        >
-                            <el-menu-item :index="idx + '-' + idx2">
-                                {{ subItem.label }}
-                            </el-menu-item>
-                        </router-link>
-                    </el-submenu>
-                    <el-menu-item v-else :index="String(idx)">{{ item.label }}</el-menu-item>
-                </router-link>
-            </el-menu>
+        <div class="info">
+            <img class="logo" src="../assets/logo.png" />
+            <span class="title">{{ title }}</span>
         </div>
+        <navi-menu :items="naviItems" class="biz-navi" />
         <div class="user-info">
             {{ userInfo.username }}
         </div>
@@ -36,24 +12,62 @@
 </template>
 
 <script>
+    import NaviMenu from '@/ui/NaviMenu';
+
     export default {
         name: 'BizHeader',
+
+        components: { NaviMenu },
+
         props: ['userInfo', 'naviItems'],
+
+        data() {
+            return {
+                title: '后台管理系统',
+            };
+        },
     };
 </script>
 
 <style lang="less" scoped>
-    .user-info {
-        position: absolute;
-        right: 13px;
-        text-align: right;
-        top: 78px;
-        color: #fff;
+@bgColor: #3463c1;
+
+.header {
+    background-color: @bgColor;
+    color: #fff;
+    position: relative;
+}
+
+.info {
+    display: inline-block;
+    padding-left: 10px;
+    margin-right: 20px;
+    vertical-align: middle;
+    height: 70px;
+    line-height: 70px;
+
+    .logo {
+        height: 70px;
     }
 
-    .router-link-exact-active {
-        .el-menu-item {
-            color: #20a0ff;
-        }
+    .title {
+        vertical-align: top;
+        display: inline-block;
     }
+}
+
+.biz-navi {
+    display: inline-block;
+    width: 400px;
+}
+
+.user-info {
+    position: absolute;
+    right: 13px;
+    text-align: right;
+    top: 0;
+    height: 70px;
+    color: #fff;
+    line-height: 70px;
+}
 </style>

@@ -1,5 +1,3 @@
-export const getUserInfo = query => fetch({
-    url: '/user/get',
-    method: 'post',
-    params: query,
-});
+import ajax from './ajax';
+
+export const getUserInfo = ajax('post', '/user/get', {});

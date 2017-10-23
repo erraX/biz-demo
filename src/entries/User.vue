@@ -4,17 +4,19 @@
             :userInfo="userInfo"
             :naviItems="naviItems"
         />
-        <router-view />
+        <div class="main">
+            <router-view />
+        </div>
         <biz-footer />
     </div>
 </template>
 
 <script>
-    import Navigations from '@/configs/Navigations';
+    import NaviItems from '@/configs/NaviItems';
     import BizHeader from '@/components/BizHeader';
     import BizFooter from "@/components/BizFooter";
 
-    import {getUserInfo} from '@/api';
+    import { getUserInfo } from '@/api';
 
     export default {
         name: 'app',
@@ -26,11 +28,8 @@
 
         data() {
             return {
-                naviItems: Navigations,
-
-                userInfo: {
-                    username: 'niminjie',
-                },
+                naviItems: NaviItems,
+                userInfo: {},
             };
         },
 
@@ -40,10 +39,9 @@
          * 比如请求用户的权限
          */
         created() {
-            this.$http.post('/user/get')
-                .then(data => {
-                    console.log(data);
-                });
+            getUserInfo().then(data => {
+                this.userInfo = data;
+            });
         },
     };
 </script>
@@ -64,5 +62,18 @@
         color: #fff;
         cursor: auto;
         text-decoration: none;
+    }
+
+    .main {
+        margin-top: 10px;
+        padding: 0 50px;
+    }
+
+    .global-loading {
+        margin-top: 70px;
+    }
+
+    .global-message {
+        top: 80px;
     }
 </style>

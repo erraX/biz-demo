@@ -1,6 +1,5 @@
 <template>
    <div class="add-plan">
-       <linkage v-model="link"></linkage>
        <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm" style="width: 440px;">
            <el-form-item label="密码" prop="pass">
                <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
@@ -23,14 +22,9 @@
 </template>
 
 <script>
-    import Linkage from '@/ui/Linkage';
 
 export default {
     name: 'AddPlan',
-
-    components: {
-        Linkage,
-    },
 
     data() {
         var checkUsername = (rule, value, callback) => {
