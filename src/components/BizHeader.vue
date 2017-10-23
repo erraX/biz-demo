@@ -19,13 +19,23 @@
 
         components: { NaviMenu },
 
-        props: ['userInfo', 'naviItems'],
+        props: {
+            userInfo: {
+                type: Object,
+                default: () => ({}),
+            },
+
+            naviItems: {
+                type: Array,
+                default: () => ([]),
+            },
+        },
 
         data() {
             return {
                 title: '后台管理系统',
             };
-        },
+        }
     };
 </script>
 

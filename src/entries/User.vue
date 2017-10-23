@@ -1,22 +1,16 @@
 <template>
     <div id="app">
-        <biz-header
-            :userInfo="userInfo"
-            :naviItems="naviItems"
-        />
-        <div class="main">
-            <router-view />
-        </div>
+        <biz-header :userInfo="userInfo" :naviItems="naviItems" />
+        <div class="main"><router-view /></div>
         <biz-footer />
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     import NaviItems from '@/configs/NaviItems';
     import BizHeader from '@/components/BizHeader';
     import BizFooter from "@/components/BizFooter";
-
-    import { getUserInfo } from '@/api';
 
     export default {
         name: 'app',
@@ -29,19 +23,13 @@
         data() {
             return {
                 naviItems: NaviItems,
-                userInfo: {},
             };
         },
 
-        /**
-         * 页面初始化的时候
-         * 做一些请求？
-         * 比如请求用户的权限
-         */
-        created() {
-            getUserInfo().then(data => {
-                this.userInfo = data;
-            });
+        computed: {
+            ...mapState({
+                userInfo: state => state.user.info,
+            }),
         },
     };
 </script>
