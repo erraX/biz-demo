@@ -4,6 +4,9 @@ const config = require('../config')
 const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
+  preLoaders: {
+    js: 'veui-loader'
+  },
   loaders: utils.cssLoaders({
     sourceMap: isProduction
       ? config.build.productionSourceMap

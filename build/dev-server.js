@@ -50,7 +50,6 @@ const hotMiddleware = require('webpack-hot-middleware')(compiler, {
 // compilation error display
 app.use(hotMiddleware)
 
-
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
     const filter = (pathname, req) => {

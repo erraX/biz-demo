@@ -2,23 +2,29 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import VueResource from 'vue-resource';
-import ElementUI from 'element-ui';
-import User from './entries/User';
+import App from './components/App';
 import store from './store';
 import router from './router';
+import * as Veui from 'veui';
 
-import 'element-ui/lib/theme-default/index.css'
+function VeuiInstallation(Vue, options) {
+    Object.keys(Veui).forEach(name => {
+
+        // `ViInput` => <vi-input>
+        Vue.component(`Vi${name}`, Veui[name]);
+    });
+}
 
 Vue.config.productionTip = false;
 
 Vue.use(VueResource);
-Vue.use(ElementUI);
+Vue.use(VeuiInstallation);
 
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
     router,
     store,
-    template: '<User />',
-    components: { User },
+    template: '<App />',
+    components: { App },
 });

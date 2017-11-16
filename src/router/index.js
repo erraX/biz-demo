@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '../store';
-import { getUserInfo } from '@/api';
+import { api } from '@/configs';
 
 import Home from '@/components/Home';
-import ListPlan from '@/components/ListPlan';
-import AddPlan from '@/components/AddPlan';
-import BasicReport from '@/components/BasicReport';
-import ListView from '@/components/ListView';
+// import ListPlan from '@/components/ListPlan';
+// import AddPlan from '@/components/AddPlan';
+// import BasicReport from '@/components/BasicReport';
+// import ListView from '@/components/ListView';
 
 import Page400 from '@/components/Page400';
 import Page404 from '@/components/Page404';
@@ -20,7 +20,7 @@ function resolveUserInfo() {
     // 没有用户信息，就去取，然后存到store里面
     return (userInfo && userInfo.username)
         ? Promise.resolve(userInfo)
-        : getUserInfo().then(
+        : api.getUserInfo().then(
             ({ body: info }) => {
                 store.commit('SET_INFO', info);
                 return info;
@@ -41,24 +41,24 @@ const router = new Router({
             name: '400',
             component: Page400,
         },
-        {
-            path: '/plan',
-            name: '推广管理',
-            component: ListPlan,
-            meta: { hasPermission: user => true },
-        },
-        {
-            path: '/plan/list',
-            name: '列表页',
-            component: ListView,
-            meta: { hasPermission: user => true },
-        },
-        {
-            path: '/plan/list',
-            name: '列表页',
-            component: ListView,
-            meta: { hasPermission: () => true },
-        },
+        // {
+        //     path: '/plan',
+        //     name: '推广管理',
+        //     component: ListPlan,
+        //     meta: { hasPermission: user => true },
+        // },
+        // {
+        //     path: '/plan/list',
+        //     name: '列表页',
+        //     component: ListView,
+        //     meta: { hasPermission: user => true },
+        // },
+        // {
+        //     path: '/plan/list',
+        //     name: '列表页',
+        //     component: ListView,
+        //     meta: { hasPermission: () => true },
+        // },
         {
             path: '*',
             name: '404',

@@ -4,8 +4,8 @@
  */
 
 import Vue from 'vue';
-import loading from '@/ui/GlobalLoading';
-import message from '@/ui/GlobalMessage';
+// import loading from '@/ui/GlobalLoading';
+// import message from '@/ui/GlobalMessage';
 
 // 默认的成功、失败结果处理函数
 export const resolveResponse = (response = {}) => response.body;
@@ -13,11 +13,11 @@ export const resolveError = (error = {}) => error;
 
 // 全局失败处理函数
 export const globalFailedHandler = resolver => error => {
-    loading.close();
+    // loading.close();
 
     // Show error message
     const errorMsg = error.msg || '请求失败，请稍候再试！';
-    message({ message: errorMsg });
+    // message({ message: errorMsg });
 
     error = resolver(error);
 
@@ -32,7 +32,7 @@ export const globalFailedHandler = resolver => error => {
 
 // 全局成功处理函数
 export const globalSucceedHandler = resolver => response => {
-    loading.close();
+    // loading.close();
     return resolver(response);
 };
 
@@ -50,7 +50,7 @@ export default (method, url, {
     errorResolver = resolveError,
 }) => params => {
     if (showLoading) {
-        loading.show();
+        // loading.show();
     }
 
     return Vue.http[method](url, params)
