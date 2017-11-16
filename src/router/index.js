@@ -7,22 +7,23 @@ import Home from '@/components/Home';
 import ListPlan from '@/components/ListPlan';
 import AddPlan from '@/components/AddPlan';
 import BasicReport from '@/components/BasicReport';
+import ListView from '@/components/ListView';
 
 import Page400 from '@/components/Page400';
 import Page404 from '@/components/Page404';
 
 Vue.use(Router);
 
-const resolveUserInfo = () => {
+function resolveUserInfo() {
     const userInfo = store.state.user.info;
 
     // 没有用户信息，就去取，然后存到store里面
     return (userInfo && userInfo.username)
         ? Promise.resolve(userInfo)
         : getUserInfo().then(
-            data => {
-                store.commit('SET_INFO', data);
-                return data;
+            ({ body: info }) => {
+                store.commit('SET_INFO', info);
+                return info;
             }
         );
 };
@@ -39,31 +40,39 @@ const router = new Router({
             path: '/400',
             name: '400',
             component: Page400,
-            meta: { hasPermission: () => true },
         },
         {
             path: '/plan',
             name: '推广管理',
             component: ListPlan,
-            meta: { hasPermission: user => false },
+            meta: { hasPermission: user => true },
         },
         {
-            path: '/report/basic',
-            name: '基础报告',
-            component: BasicReport,
+            path: '/plan/list',
+            name: '列表页',
+            component: ListView,
+            meta: { hasPermission: user => true },
+        },
+        {
+            path: '/plan/list',
+            name: '列表页',
+            component: ListView,
             meta: { hasPermission: () => true },
         },
         {
             path: '*',
             name: '404',
             component: Page404,
-            meta: { hasPermission: () => true },
         },
     ],
 });
 
 // 路由权限管理
 router.beforeEach((to, from, next) => {
+    if (to.name === '404' || to.name === '400') {
+        next();
+    }
+
     const { hasPermission = () => true } = to.meta;
 
     // 判断是否有权限

@@ -1,83 +1,71 @@
-<template>
-    <div class="header">
-        <div class="info">
-            <img class="logo" src="../assets/logo.png" />
-            <span class="title">{{ title }}</span>
-        </div>
-        <navi-menu :items="naviItems" class="biz-navi" />
-        <div class="user-info">
-            {{ userInfo.username }}
-        </div>
-    </div>
-</template>
-
 <script>
-    import NaviMenu from '@/ui/NaviMenu';
+    import NaviItems from '@/configs/NaviItems'
 
     export default {
         name: 'BizHeader',
 
-        components: { NaviMenu },
-
-        props: {
-            userInfo: {
-                type: Object,
-                default: () => ({}),
-            },
-
-            naviItems: {
-                type: Array,
-                default: () => ([]),
-            },
-        },
-
         data() {
             return {
-                title: '后台管理系统',
+
+                /**
+                 * 已登陆用户名
+                 *
+                 * @type {string}
+                 */
+                username: 'niminjie',
+
+                /**
+                 * 导航
+                 *
+                 * @type {Array<Object>}
+                 */
+                navigations: NaviItems,
             };
-        }
+        },
+
+        render(h) {
+            return (
+                <div class="header">
+                    <div class="navi-container">
+                        {
+                            this.navigations.map(item =>
+                                <div class={'navi-' + item.key}>
+                                    <a href={item.link}>{item.label}</a>
+                                    {
+                                        item.childLinks && item.childLinks.length
+                                            ? (
+                                                <div class="dropdown">
+                                                    {item.childLinks.map(i =>
+                                                        <a href={i.link}>{i.label}</a>
+                                                    )}
+                                                </div>
+                                            )
+                                            : null
+                                    }
+                                </div>
+                            )
+                        }
+                    </div>
+                    <div class="user-info">
+                        {this.username}
+                        <a class="logout" href="/logout.html">登出</a>
+                    </div>
+                </div>
+            );
+        },
     };
 </script>
 
 <style lang="less" scoped>
-@bgColor: #3463c1;
-
-.header {
-    background-color: @bgColor;
-    color: #fff;
-    position: relative;
-}
-
-.info {
-    display: inline-block;
-    padding-left: 10px;
-    margin-right: 20px;
-    vertical-align: middle;
-    height: 70px;
-    line-height: 70px;
-
-    .logo {
-        height: 70px;
+    .header {
+        background-color: #ffffff;
     }
 
-    .title {
-        vertical-align: top;
-        display: inline-block;
+    .navi-container {
+        background-color: #ffffff;
     }
-}
 
-.biz-navi {
-    display: inline-block;
-    width: 400px;
-}
-
-.user-info {
-    position: absolute;
-    right: 13px;
-    text-align: right;
-    top: 0;
-    height: 70px;
-    color: #fff;
-    line-height: 70px;
-}
+    .user-info {
+        background-color: #ffffff;
+    }
 </style>

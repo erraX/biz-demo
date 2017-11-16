@@ -8,8 +8,8 @@ import loading from '@/ui/GlobalLoading';
 import message from '@/ui/GlobalMessage';
 
 // 默认的成功、失败结果处理函数
-export const resolveResponse = (response = {}) => response.body.body;
-export const resolveError = (error = {}) => error.msg;
+export const resolveResponse = (response = {}) => response.body;
+export const resolveError = (error = {}) => error;
 
 // 全局失败处理函数
 export const globalFailedHandler = resolver => error => {

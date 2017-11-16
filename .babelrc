@@ -8,7 +8,26 @@
     }],
     "stage-2"
   ],
-  "plugins": ["transform-runtime", "transform-vue-jsx"],
+  "plugins": [
+    [
+      "veui",
+      {
+        "modules": [
+          {
+            "package": "veui-theme-x",
+            "fileName": "${module}.less"
+          },
+          {
+            "package": "veui-theme-x",
+            "fileName": "${module}.js",
+            "transform": false
+          }
+        ]
+      }
+    ],
+    "transform-runtime",
+    "transform-vue-jsx"
+  ],
   "env": {
     "test": {
       "presets": ["env", "stage-2"],

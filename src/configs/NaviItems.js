@@ -9,7 +9,13 @@ export default [
         key: 'promotion',
         label: '推广管理',
         link: '/plan',
-        childLinks: [],
+        childLinks: [
+            {
+                key: 'plan-list-view',
+                label: '列表页',
+                link: '/plan/list',
+            },
+        ],
     },
     {
         key: 'report',

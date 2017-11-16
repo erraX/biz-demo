@@ -52,7 +52,7 @@ export default {
              */
             menuCls: [
                 'navi-menu',
-                [this.class],
+                this.class,
             ],
         };
     },
