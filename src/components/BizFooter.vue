@@ -12,7 +12,7 @@ export default {
 
 <style lang="less" scoped>
 .footer {
-    text-align: center;
-    margin-top: 30px;
+  text-align: center;
+  margin-top: 30px;
 }
 </style>

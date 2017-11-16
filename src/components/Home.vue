@@ -1,15 +1,28 @@
 <template>
   <div class="hello">
-    <vi-input v-model="msg"></vi-input>
-    {{ msg }}
+    <biz-menu class="home-menu">
+      <router-link to="/home" slot="title">Halo</router-link>
+      <biz-menu-item>
+        <router-link to="/halo2">halo3</router-link>
+      </biz-menu-item>
+      <biz-menu-item>
+        <router-link to="/halo3">halo4</router-link>
+      </biz-menu-item>
+    </biz-menu>
   </div>
 </template>
 
 <script>
-import { Input } from 'veui'
+import Menu from '@/components/ui/Menu'
+import MenuItem from '@/components/ui/MenuItem'
 
 export default {
   name: 'home',
+
+  components: {
+    'biz-menu': Menu,
+    'biz-menu-item': MenuItem,
+  },
 
   data() {
     return {
@@ -36,6 +49,6 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: #fff;
 }
 </style>

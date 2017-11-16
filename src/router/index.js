@@ -9,7 +9,7 @@ import Home from '@/components/Home';
 // import BasicReport from '@/components/BasicReport';
 // import ListView from '@/components/ListView';
 
-import Page400 from '@/components/Page400';
+import Page403 from '@/components/Page403';
 import Page404 from '@/components/Page404';
 
 Vue.use(Router);
@@ -18,9 +18,9 @@ function resolveUserInfo() {
     const userInfo = store.state.user.info;
 
     // 没有用户信息，就去取，然后存到store里面
-    return (userInfo && userInfo.username)
-        ? Promise.resolve(userInfo)
-        : api.getUserInfo().then(
+    return (userInfo && userInfo.username) ?
+        Promise.resolve(userInfo) :
+        api.getUserInfo().then(
             ({ body: info }) => {
                 store.commit('SET_INFO', info);
                 return info;
@@ -29,17 +29,16 @@ function resolveUserInfo() {
 };
 
 const router = new Router({
-    routes: [
-        {
+    routes: [{
             path: '/',
             name: '首页',
             component: Home,
             meta: { hasPermission: user => true },
         },
         {
-            path: '/400',
-            name: '400',
-            component: Page400,
+            path: '/403',
+            name: '403',
+            component: Page403,
         },
         // {
         //     path: '/plan',
@@ -69,7 +68,7 @@ const router = new Router({
 
 // 路由权限管理
 router.beforeEach((to, from, next) => {
-    if (to.name === '404' || to.name === '400') {
+    if (to.name === '404' || to.name === '403') {
         next();
     }
 
@@ -77,9 +76,9 @@ router.beforeEach((to, from, next) => {
 
     // 判断是否有权限
     const settlePermission = userInfo => {
-        hasPermission(userInfo, to)
-            ? next()
-            : next('/400');
+        hasPermission(userInfo, to) ?
+            next() :
+            next('/403');
     };
 
     // 判断权限有错误
@@ -93,7 +92,7 @@ router.beforeEach((to, from, next) => {
 // 路由错误管理
 router.onError(err => {
     console.error('Error', err);
-    router.push('/400');
+    router.push('/403');
 });
 
 export default router;
