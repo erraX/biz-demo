@@ -19,15 +19,16 @@ export default {
 
 <style lang="less" scoped>
 @bg-dark: #3855B2;
+@menu-height: 60px;
 
 .menu-item {
-  height: 30px;
-  line-height: 30px;
+  height: @menu-height;
+  line-height: @menu-height;
   text-align: center;
 
-  a,
-  div,
-  span {
+  > a,
+  > div,
+  > span {
     display: inline-block;
     width: 100%;
     height: 100%;

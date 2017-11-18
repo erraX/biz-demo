@@ -1,12 +1,7 @@
-export { default as navigations } from './navigations'
-export { default as api } from './api'
-
 /**
- * 默认路径
- *
- * @type {string}
+ * @file configs
+ * @author niminjie
  */
-export const indexUrl = '/'
 
 /**
  * 系统名称
@@ -16,15 +11,29 @@ export const indexUrl = '/'
 export const systemName = 'baiyi'
 
 /**
- * 404跳转链接
- *
- * @type {string}
- */
-export const notFoundLocation = '/404'
-
-/**
  * 403跳转链接
  *
  * @type {string}
  */
 export const noAuthorityLocation = '/403'
+
+/**
+ * 路由配置
+ *
+ * @type {Array<Object>}
+ */
+export { default as routes } from './routes'
+
+/**
+ * 导航配置
+ *
+ * @type {Array<Object>}
+ */
+export { default as navigations } from './navigations'
+
+/**
+ * api配置
+ *
+ * @type {Object}
+ */
+export { default as api } from './api'

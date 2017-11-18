@@ -1,32 +1,15 @@
 <template>
-  <div class="hello">
-    <biz-menu class="home-menu">
-      <router-link to="/home" slot="title">Halo</router-link>
-      <biz-menu-item>
-        <router-link to="/halo2">halo3</router-link>
-      </biz-menu-item>
-      <biz-menu-item>
-        <router-link to="/halo3">halo4</router-link>
-      </biz-menu-item>
-    </biz-menu>
-  </div>
+  <div class="home-page">{{ msg }}</div>
 </template>
 
 <script>
-import Menu from '@/components/ui/Menu'
-import MenuItem from '@/components/ui/MenuItem'
 
 export default {
   name: 'home',
 
-  components: {
-    'biz-menu': Menu,
-    'biz-menu-item': MenuItem,
-  },
-
   data() {
     return {
-        msg: 'Welcome to Your Vue.js App',
+      msg: 'Welcome',
     };
   },
 };

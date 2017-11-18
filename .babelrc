@@ -30,6 +30,7 @@
         ]
       }
     ],
+    "transform-decorators-legacy",
     "transform-vue-jsx",
     "transform-runtime"
   ],
