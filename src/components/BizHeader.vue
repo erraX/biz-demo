@@ -39,14 +39,17 @@
 </template>
 
 <script>
-import BizMenu from "@/components/ui/Menu";
-import BizMenuItem from "@/components/ui/MenuItem";
-import { mapState } from "vuex";
-import { navigations } from "@/configs";
-import logo from "@/assets/user-logo@2x.png";
+import visibilityCompCreator from '@/mixins/visibilityCompCreator'
+import BizMenu from '@/components/ui/Menu'
+import BizMenuItem from '@/components/ui/MenuItem'
+import { mapState } from 'vuex'
+import { navigations } from '@/configs'
+import logo from '@/assets/user-logo@2x.png'
 
 export default {
   name: "BizHeader",
+
+  mixins: [ visibilityCompCreator() ],
 
   components: {
     BizMenu,
@@ -55,7 +58,6 @@ export default {
 
   data() {
     return {
-      visible: true,
       navigations,
       logo,
       logoutUrl: "/logout.html"
@@ -69,7 +71,7 @@ export default {
 
     username() {
       return (this.userInfo && this.userInfo.username) || "";
-    }
+    },
   },
 
   methods: {
@@ -82,7 +84,6 @@ export default {
     * @return {boolean}
     */
     isActive(path, isParent) {
-      console.log(this)
       if (!isParent) {
         return path === this.$route.path;
       }
@@ -102,6 +103,13 @@ export default {
   background-color: @biz-blue-normal;
   height: @navi-height;
   font-size: 18px;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 900px;
+  z-index: 9999;
 }
 
 .logo {

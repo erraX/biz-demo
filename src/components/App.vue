@@ -26,7 +26,7 @@ export default {
 @import "../styles/normalize.less";
 
 .main {
-  margin-top: 10px;
+  margin-top: 60px;
   padding: 0 50px;
 }
 </style>

@@ -1,11 +1,18 @@
 <template>
+<base-view>
   <div class="home-page">{{ msg }}</div>
+</base-view>
 </template>
 
 <script>
+import BaseView from './BaseView'
 
 export default {
   name: 'home',
+
+  components: {
+    BaseView,
+  },
 
   data() {
     return {

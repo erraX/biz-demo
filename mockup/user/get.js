@@ -1,4 +1,4 @@
-exports.timeout = 3000;
+exports.timeout = 2000;
 exports.response = function () {
     return {
         success: 1,

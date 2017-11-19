@@ -8,7 +8,7 @@ export default [
     {
         key: 'promotion',
         label: '推广管理',
-        link: '/plan',
+        link: '/plan/list',
         childLinks: [
             {
                 key: 'plan-list-view',

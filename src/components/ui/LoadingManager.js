@@ -3,7 +3,7 @@ import Loading from './Loading'
 
 const ViLoading = Vue.extend(Loading)
 
-class LoadingManager {
+export class LoadingManager {
   constructor() {
     this.loading = new ViLoading()
     this.el = this.createContainer()

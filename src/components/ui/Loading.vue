@@ -41,6 +41,7 @@ export default {
   height: 100%;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.7);
+  z-index: 9998;
 }
 
 .content {
