@@ -9,7 +9,6 @@ import visibilityCompCreator from '@/mixins/visibilityCompCreator'
 
 export default {
   name: 'BizFooter',
-
   mixins: [ visibilityCompCreator() ],
 };
 </script>

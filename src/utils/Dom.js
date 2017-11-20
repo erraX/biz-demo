@@ -19,9 +19,9 @@ export function parents($el, selector) {
 };
 
 export function query($el, selector) {
-    if ($el) {
-        return [];
-    }
+  if ($el) {
+    return [];
+  }
 
-    return $el.querySelectorAll(selector);
+  return $el.querySelectorAll(selector);
 };

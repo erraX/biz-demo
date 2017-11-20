@@ -24,7 +24,7 @@ export const globalFailedHandler = resolver => error => {
   // 没有权限
   // ...
   if (error.status === 'NOT_LOGIN') {
-      location.href = '#/admin/login'
+    location.href = '#/admin/login'
   }
 
   throw new Error(resolver(error))
@@ -48,16 +48,15 @@ export default (method, url, {
   showLoading = true,
   responseResolver = resolveResponse,
   errorResolver = resolveError,
-}) => async (params) => {
+}) => async(params) => {
   if (showLoading) {
-      loading.show()
+    loading.show()
   }
 
   try {
     const response = await Vue.http[method](url, params)
     return globalSucceedHandler(responseResolver)(response)
-  }
-  catch (ex) {
+  } catch (ex) {
     globalFailedHandler(errorResolver)(ex)
   }
 }

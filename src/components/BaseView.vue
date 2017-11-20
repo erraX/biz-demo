@@ -14,7 +14,6 @@ export default {
 
   computed: {
     crumbData() {
-      console.log(this.$route.path)
       const match = this.$router.matcher.match
       if (this.$route.path === '/') {
         return []

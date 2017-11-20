@@ -1,23 +1,25 @@
 export default {
-    state: {
-        info: {
-            username: '',
-        },
+  state: {
+    info: {
+      username: '',
     },
+  },
 
-    mutations: {
-        SET_INFO: (state, info) => {
-            state.info = info;
-        }
-    },
+  mutations: {
+    SET_INFO: (state, info) => {
+      state.info = info;
+    }
+  },
 
-    actions: {
-        SET_INFO({ commit }, info) {
-            commit('SET_INFO', info);
-        },
+  actions: {
+    SET_INFO({
+      commit
+    }, info) {
+      commit('SET_INFO', info);
     },
+  },
 
-    getters: {
-        user: state => state.user,
-    },
+  getters: {
+    user: state => state.user,
+  },
 };

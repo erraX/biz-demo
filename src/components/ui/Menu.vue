@@ -23,9 +23,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@bg-color: #4664C0;
-@bg-dark: #3855B2;
-@menu-height: 60px;
+@import "../../styles/variables.less";
 
 .menu {
   display: inline-block;
@@ -35,14 +33,14 @@ export default {
 .trigger {
   display: inline-block;
   position: relative;
-  height: @menu-height;
-  line-height: @menu-height;
+  height: @header-height;
+  line-height: @header-height;
   text-align: center;
-  background-color: @bg-color;
+  background-color: @biz-blue-normal;
 
   &:hover {
     cursor: pointer;
-    background-color: @bg-dark;
+    background-color: @biz-blue-dark;
 
     .dropdown {
       display: block;
@@ -59,8 +57,8 @@ export default {
 .dropdown {
   display: none;
   position: absolute;
-  top: @menu-height;
-  background-color: @bg-color;
+  top: @header-height;
+  background-color: @biz-blue-normal;
   left: 0;
 }
 </style>

@@ -11,13 +11,13 @@
 import { Progress } from 'veui'
 export default {
   components: {
-     'veui-progress': Progress
+    'veui-progress': Progress,
   },
 
   data() {
     return {
-      visible: true,
-    }
+      visible: true
+    };
   },
 
   methods: {

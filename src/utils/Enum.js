@@ -54,7 +54,11 @@ export default class Enum {
    * @param {number} idx idx
    */
   _parseEntity(entity, idx) {
-    let { alias, text, value } = entity
+    let {
+      alias,
+      text,
+      value
+    } = entity
     value = (value === undefined || value === null) ? idx : value
 
     if (has(this, value)) {

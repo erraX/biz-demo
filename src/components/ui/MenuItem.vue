@@ -10,20 +10,19 @@ export default {
     return {
       menuItemCls: [
         "menu-item",
-         this.class
+         this.classS,
       ]
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="less" scoped>
-@bg-dark: #3855B2;
-@menu-height: 60px;
+@import "../../styles/variables.less";
 
 .menu-item {
-  height: @menu-height;
-  line-height: @menu-height;
+  height: @header-height;
+  line-height: @header-height;
   text-align: center;
 
   > a,
@@ -35,7 +34,7 @@ export default {
   }
 
   &:hover {
-    background-color: @bg-dark;
+    background-color: biz-blue-dark;
     cursor: pointer;
   }
 }

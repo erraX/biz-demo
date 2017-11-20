@@ -24,9 +24,10 @@ export default {
 
 <style lang="less">
 @import "../styles/normalize.less";
+@import "../styles/variables.less";
 
 .main {
-  margin-top: 60px;
+  margin-top: @header-height;
   padding: 0 50px;
 }
 </style>
